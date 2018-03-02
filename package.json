@@ -4,6 +4,7 @@
   "description": "Structured query for filtering data",
   "main": "index.js",
   "scripts": {
+    "start": "parcel ./example/index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Kyle",
@@ -16,5 +17,11 @@
     "prop-types": "^15.6.0",
     "react": "^16.x.x",
     "react-onclickoutside": "^6.6.0"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "parcel-bundler": "^1.6.2",
+    "react-dom": "^16.2.0"
   }
 }
