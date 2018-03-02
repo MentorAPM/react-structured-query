@@ -1,0 +1,17 @@
+{
+  "name": "structured-query",
+  "version": "1.0.1",
+  "description": "Structured query for filtering data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kyle",
+  "license": "ISC",
+  "dependencies": {
+    "fuzzy": "^0.1.3",
+    "prop-types": "^15.6.0",
+    "react": "^16.x.x",
+    "react-onclickoutside": "^6.6.0"
+  }
+}
