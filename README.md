@@ -1,13 +1,3 @@
-# NOTICE
-
-This product contains a modified version of the react-structured-filter 
-library which is copyright (c) 2015, Summit Route LLC.
-
-* License: BSD
-	* https://github.com/SummitRoute/react-structured-filter/blob/master/LICENSE
-* Homepage
-	* https://github.com/SummitRoute/react-structured-filter
-
 # Structured Query
 
 ## Overview
