@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import ExampleTable from './js/ExampleTable';
+import Main from './js/Main';
 
-ReactDOM.render(<ExampleTable />, document.getElementById('root'));
+ReactDOM.render(<Main />, document.getElementById('root'));
