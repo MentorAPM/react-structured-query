@@ -1,3 +1,3 @@
-import StructuredFilter from './react-typeahead/tokenizer/tokenizer';
+import StructuredFilter from './src/tokenizer/tokenizer';
 
 export default StructuredFilter;
