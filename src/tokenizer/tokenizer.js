@@ -27,7 +27,11 @@ class Tokenizer extends Component {
 		initTokens: [],
 		disabled: false,
 		enableQueryOnClick: false,
-		exportSearch: null
+		exportSearch: null,
+		stringOperations: STRING_OPERATIONS,
+		numOperations: NUM_DATE_OPERATIONS,
+		dateOperations: NUM_DATE_OPERATIONS,
+		enumOperations: ENUM_OPERATIONS
 	}
 
 	static propTypes = {
@@ -38,13 +42,16 @@ class Tokenizer extends Component {
 		customClasses: PropTypes.object,
 		onTokenRemove: PropTypes.func,
 		onTokenAdd: PropTypes.func,
-		initTokens: PropTypes.arrayOf(PropTypes.object)
+		initTokens: PropTypes.arrayOf(PropTypes.object),
+		stringOperations: PropTypes.arrayOf(PropTypes.string),
+		numOperations: PropTypes.arrayOf(PropTypes.string),
+		dateOperations: PropTypes.arrayOf(PropTypes.string),
+		enumOperations: PropTypes.arrayOf(PropTypes.string)
 	}
 
 	constructor(props) {
 		super(props);
 
-		// State tracks the following:
 		// @selected - holds all user generated tokens to search with
 		// 	Ex: [{category: 'id', operator: '=', value: '123'}, ...]
 		// @nextToken - holds the next token to be added to the search tokens
@@ -108,14 +115,15 @@ class Tokenizer extends Component {
 			switch (categoryType) {
 				case 'string':
 				case 'email':
-					return STRING_OPERATIONS;
+					return this.props.stringOperations;
 				case 'enumoptions':
 				case 'boolean':
-					return ENUM_OPERATIONS;
+					return this.props.enumOperations;
 				case 'integer':
 				case 'float':
+					return this.props.numOperations;
 				case 'datetime':
-					return NUM_DATE_OPERATIONS;
+					return this.props.dateOperations;
 				default:
 					return [];
 			}
