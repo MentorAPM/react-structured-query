@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel ./example/index.html",
+    "build": "parcel build index.js --out-dir build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Kyle",
@@ -19,6 +20,7 @@
     "react-onclickoutside": "^6.6.0"
   },
   "devDependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "less": "^3.0.1",

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import Typeahead from '../typeahead/typeahead';
 import Token from './token';
-import KeyEvent from 'keyevent';
+import KeyEvent from '../keyevent/keyevent';
 
 // operations for strings
 const STRING_OPERATIONS = ['==', '!=', 'contains', '!contains', 'like', '!like',

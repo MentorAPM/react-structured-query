@@ -7,7 +7,7 @@ import moment from 'moment';
 
 import TypeaheadSelector from './selector';
 import DatePicker from '../datepicker/datepicker';
-import KeyEvent from 'keyevent';
+import KeyEvent from '../keyevent/keyevent';
 
 // Typeahead an auto-completion text input
 //
