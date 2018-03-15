@@ -1,11 +1,11 @@
 {
-  "name": "structured-query",
+  "name": "@makkoli/structured-query",
   "version": "1.0.1",
   "description": "Structured query for filtering data",
   "main": "index.js",
   "scripts": {
     "start": "parcel ./example/index.html",
-    "build": "parcel build index.js --out-dir build",
+    "build": "parcel build ./src/index.js --out-dir build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Kyle",
@@ -26,5 +26,21 @@
     "less": "^3.0.1",
     "parcel-bundler": "^1.6.2",
     "react-dom": "^16.2.0"
-  }
+  },
+  "directories": {
+    "example": "example"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MentorAPM/react-structured-query.git"
+  },
+  "keywords": [
+    "react",
+    "filter",
+    "query"
+  ],
+  "bugs": {
+    "url": "https://github.com/MentorAPM/react-structured-query/issues"
+  },
+  "homepage": "https://github.com/MentorAPM/react-structured-query#readme"
 }

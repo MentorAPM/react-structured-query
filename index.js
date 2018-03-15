@@ -1,3 +1,4 @@
-import StructuredFilter from './src/tokenizer/tokenizer';
+import StructuredFilter from './build/structured-query';
 
 export default StructuredFilter;
+
