@@ -1,5 +1,5 @@
 {
-  "name": "@makkoli/structured-query",
+  "name": "React Structured Query",
   "version": "1.0.1",
   "description": "Structured query for filtering data",
   "main": "index.js",

@@ -23,7 +23,7 @@ npm run build
 ```
 npm start
 ```
-* Run tests
+* Run tests and generate coverage
 ```
 npm run test
 ```
@@ -47,7 +47,7 @@ fuzzy matching for all lists. Space, tab, and enter will autocomplete as well.
 
 ### Styling
 
-CSS styles can be found in [structured-filter.css](./example/css/structured-filter.less)
+CSS styles can be found in [structured-filter.css](./example/css/structured-filter.css)
 Datepicker styles can be found in [input-moment.css](./example/css/input-moment.css)
 
 ## Props
