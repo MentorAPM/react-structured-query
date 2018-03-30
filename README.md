@@ -4,7 +4,7 @@
 
 Structured Query is a UI library that can be used to filter data in a table.
 
-It is an continuation of https://github.com/SummitRoute/react-structured-filter.
+It is a continuation of https://github.com/SummitRoute/react-structured-filter.
 
 It also uses https://github.com/wangzuo/input-moment for the date picker for 
 date data types.
@@ -47,20 +47,6 @@ CSS styles can be found in [structured-filter.css](./example/css/structured-filt
 Datepicker styles can be found in [input-moment.css](./example/css/input-moment.css)
 
 ## Props
-
-* **[options ( *[object]* )](#props.options)** 
-* **[stringOperations] ( *[string]* )](#props.stringoperations)**
-* **[numOperations] ( *[string]* )](#props.numoperations)**
-* **[dateOperations] ( *[string]* )](#props.dateoperations)**
-* **[enumOperations] ( *[string]* )](#props.enumoperations)**
-* **[customClasses ( *object* )](#props.customclasses)**
-* **[initTokens ( *[object]* )](#props.inittokens)**
-* **[onTokenAdd ( *function* )](#props.ontokenadd)** 
-* **[onTokenRemove ( *function* )](#props.ontokenremove)** 
-* **[exportSearch ( *function* )](#props.exportsearch)**
-* **[disabled ( *boolean* )](#props.disabled)**
-* **[enableQueryOnClick ( *boolean* )](#props.enablequeryonclick)**
-
 
 #### props.options
 
@@ -107,8 +93,8 @@ category.
 A list of options that will generate if the value is supposed to be an 
 enumerable list. Used with the enumoptions data type.
 
-*Note:* Boolean data type does not generate a default list and you should pass 
-in an on options object describing the true/false for it.
+*Note:* Boolean data type has a default list of `['True', 'False']`. This 
+can be overrode by passing in your own options object.
 
 * optionObjs ( *[object]* )
 
@@ -148,14 +134,7 @@ Operations on integer and float data types. Defaults:
 
 #### props.dateOperations
 
-Operations on date data types. Defaults:
-
-* ==
-* !=
-* <
-* <=
-* \>
-* \>=
+Operations on date data types. Defaults are same as integer operations.
 
 #### props.enumOperations
 

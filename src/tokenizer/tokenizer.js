@@ -57,9 +57,9 @@ class Tokenizer extends Component {
 		// @nextToken - holds the next token to be added to the search tokens
 		// 		which are sent for filtering -- 
 		// 		contains:
-		// 			@id - column id for back end retrieval
-		// 			@category - which column to search in
-		//	 		@operator - the operator to apply to the column
+		// 			@id - id for back end retrieval
+		// 			@category - which field to search in
+		//	 		@operator - the operator to apply to the field
 		//	 		@value - the value to search for
 		// @disabled: turn structured query off but used to displays tokens
 		this.state = {
@@ -127,10 +127,10 @@ class Tokenizer extends Component {
 	}
 
 
-	// Get the data type of a column category
+	// Get the data type of a category
 	_getCategoryType() {
 		let categorySelected = this.props.options.find(option => {
-			return option.category === this.state.nextToken.category;
+			return option.id === this.state.nextToken.id;
 		});
 
 		return categorySelected.type;
@@ -141,10 +141,15 @@ class Tokenizer extends Component {
 	// options object
 	_getCategoryOptions() {
 		let categorySelected = this.props.options.find(option => {
-			return option.category === this.state.nextToken.category;
+			return option.id === this.state.nextToken.id;
 		});
 
 		let options = categorySelected.options || categorySelected.optionObjs;
+
+		// default case for boolean data types
+		if (categorySelected.type === 'boolean' && !options) {
+			return ['True', 'False'];
+		}
 
 		return options;
 	}
@@ -252,14 +257,13 @@ class Tokenizer extends Component {
 	
 	// Add a category to the new token
 	_addCategoryToNewToken(value) {
-		// we need to attach the column id so we can fetch from back end
-		let columnId = this.props.options.find(option => {
+		let tokenId = this.props.options.find(option => {
 			return option.category === value;
 		}).id;
 
 		const newToken = Object.assign({},
 				this.state.nextToken,
-				{ id: columnId, category: value, });
+				{ id: tokenId, category: value, });
 
 		this.setState({
 			nextToken: newToken
