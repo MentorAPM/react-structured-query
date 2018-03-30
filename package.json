@@ -6,9 +6,9 @@
   "scripts": {
     "start": "parcel ./example/index.html",
     "build": "parcel build ./src/index.js --out-dir build",
-    "test": "tape -r babel-register src/**/__tests__/*.test.js | faucet"
+    "test": "cross-env NODE_ENV=test nyc tape src/**/__tests__/*.test.js | faucet"
   },
-  "author": "Kyle",
+  "author": "MentorAPM",
   "license": "ISC",
   "dependencies": {
     "classnames": "^2.2.5",
@@ -20,15 +20,19 @@
     "react-onclickoutside": "^6.6.0"
   },
   "devDependencies": {
+    "babel-plugin-istanbul": "^4.1.5",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.6.1",
     "babel-preset-es2017": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
+    "cross-env": "^5.1.4",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "faucet": "0.0.1",
+    "jsdom": "^11.6.2",
     "less": "^3.0.1",
+    "nyc": "^11.6.0",
     "parcel-bundler": "^1.6.2",
     "react-dom": "^16.2.0",
     "tape": "^4.9.0"
@@ -45,6 +49,18 @@
     "filter",
     "query"
   ],
+  "nyc": {
+	  "require": [
+		  "babel-register",
+		  "./test/browser.js"
+	  ],
+	  "reporter": [
+		  "lcov",
+		  "text"
+	  ],
+	  "sourceMap": false,
+	  "instrument": false
+  },
   "bugs": {
     "url": "https://github.com/MentorAPM/react-structured-query/issues"
   },
