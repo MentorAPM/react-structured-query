@@ -6,7 +6,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import Tokenizer from '../tokenizer';
 import Typeahead from '../../typeahead/typeahead';
 import Token from '../token';
-import KeyEvent from 'keyevent';
+import KeyEvent from '../../keyevent/keyevent';
 
 configure({ adapter: new Adapter() });
 

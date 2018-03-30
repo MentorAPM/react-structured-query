@@ -8,7 +8,7 @@ import moment from 'moment';
 import { Typeahead } from '../typeahead';
 import Selector from '../selector';
 import Option from '../option';
-import KeyEvent from 'keyevent';
+import KeyEvent from '../../keyevent/keyevent';
 import DatePicker from '../../datepicker/datepicker';
 
 configure({ adapter: new Adapter() });

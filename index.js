@@ -1,4 +1,4 @@
-import StructuredFilter from './build/structured-query';
+import StructuredFilter from './build';
 
 export default StructuredFilter;
 

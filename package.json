@@ -6,7 +6,7 @@
   "scripts": {
     "start": "parcel ./example/index.html",
     "build": "parcel build ./src/index.js --out-dir build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tape -r babel-register src/**/__tests__/*.test.js | faucet"
   },
   "author": "Kyle",
   "license": "ISC",
@@ -22,10 +22,16 @@
   "devDependencies": {
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.6.1",
+    "babel-preset-es2017": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "faucet": "0.0.1",
     "less": "^3.0.1",
     "parcel-bundler": "^1.6.2",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "tape": "^4.9.0"
   },
   "directories": {
     "example": "example"
