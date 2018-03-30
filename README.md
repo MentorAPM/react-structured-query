@@ -2,8 +2,27 @@
 
 ## Overview
 
-Structured Query is a library that can be used to filter data. Is used in
-conjunction with [kyle tables](../kyle-tables).
+Structured Query is a UI library that can be used to filter data in a table.
+
+It is an continuation of https://github.com/SummitRoute/react-structured-filter.
+
+It also uses https://github.com/wangzuo/input-moment for the date picker for 
+date data types.
+
+## Scripts
+
+* Install
+```
+npm install react-structured-query --save
+```
+* Build bundle
+```
+npm run build
+```
+* Run example
+```
+npm start
+```
 
 ### Features
 
@@ -24,92 +43,134 @@ fuzzy matching for all lists. Space, tab, and enter will autocomplete as well.
 
 ### Styling
 
-CSS styles can be found in [structured-filter.css](../../../dependencies/styles/structured-filter.css)
-Datepicker styles can be found in [input-moment.css](../../../dependencies/styles/input-moment.css)
+CSS styles can be found in [structured-filter.css](./example/css/structured-filter.less)
+Datepicker styles can be found in [input-moment.css](./example/css/input-moment.css)
 
 ## Props
 
-* **[options ( *[object]* )](#options)** 
-* **[customClasses ( *object* )](#customclasses)**
-* **[initTokens ( *[object]* )](#inittokens)**
-* **[onTokenAdd ( *function* )](#ontokenadd)** 
-* **[onTokenRemove ( *function* )](#ontokenremove)** 
-* **[disabled ( *boolean* )](#disabled)**
-* **[enableQueryOnClick ( *boolean* )](#enablequeryonclick)**
+* **[options ( *[object]* )](#props.options)** 
+* **[stringOperations] ( *[string]* )](#props.stringoperations)**
+* **[numOperations] ( *[string]* )](#props.numoperations)**
+* **[dateOperations] ( *[string]* )](#props.dateoperations)**
+* **[enumOperations] ( *[string]* )](#props.enumoperations)**
+* **[customClasses ( *object* )](#props.customclasses)**
+* **[initTokens ( *[object]* )](#props.inittokens)**
+* **[onTokenAdd ( *function* )](#props.ontokenadd)** 
+* **[onTokenRemove ( *function* )](#props.ontokenremove)** 
+* **[exportSearch ( *function* )](#props.exportsearch)**
+* **[disabled ( *boolean* )](#props.disabled)**
+* **[enableQueryOnClick ( *boolean* )](#props.enablequeryonclick)**
 
 
-### options
+#### props.options
 
-A list of opjects describing the options that are available in lists 
+A list of objects describing the options that are available in lists 
 for categories, operations, and values(*optional*).
 
 An example options prop:
 
 ```javascript
-[ { id: '123', category: 'Display123', type: 'enumoptions', options: ['foo', 'bar'] },
-{ id: 'baz', category: 'Another category', type: 'integer' } ]
+[
+	{
+		id: '123',
+		category: 'Display123',
+		type: 'enumoptions',
+		options: ['foo', 'bar']
+	},
+	{
+		id: 'baz',
+		category: 'Another category',
+		type: 'integer'
+	}
+]
 ```
 
-#### Id ( *string* )
+* id ( *string* ) -- Identifier for the token. Attached to the token when user 
+selects a category.
 
-Identifier for the token. Attached to the token when user selects a category.
+* category ( *string* ) -- Display name to show to the user.
 
-#### Category ( *string* )
+* type ( *string* ) -- data type for what kind of operations are allowed on the 
+category.
 
-Display name to show to the user.
+  * Allowable types:
+    * string
+    * email
+    * enumoptions
+    * boolean
+    * integer
+    * float
+    * datetime
 
-#### Type ( *string* )
-
-Type says what kind of operations are allowed on the category.
-
-The following operations are allowed based on what data type is equal to:
-
-##### Data Types
-* string, email
-	* ==
-	* !=
-	* contains
-	* !contains
-	* like
-	* !like
-	* startsWith
-	* !startsWith
-	* endsWith
-	* !endsWith
-* integer, float, datetime
-	* ==
-	* !=
-	* <
-	* <=
-	* \>
-	* \>=
-* enumoptions, boolean
-	* ==
-	* !=
-
-#### Options ( *[string]* )
+* options ( *[string]* )
 
 A list of options that will generate if the value is supposed to be an 
-enumerable list. Used with enumoptions data type.
+enumerable list. Used with the enumoptions data type.
 
 *Note:* Boolean data type does not generate a default list and you should pass 
 in an on options object describing the true/false for it.
 
-#### OptionObjs ( *[object]* )
+* optionObjs ( *[object]* )
 
 A list of options that will generate if the value is supposed to be an 
-enumerable list. This one will take objects that must an id and name field
+enumerable list. This one will take objects that must have an id and name field
 in them. Structured query will generate a list based on the name field. 
 Used with enumoptions data type.
 
 *Note:* If an options object passes both an options and optionObjs prop,
 only the options prop will be used and optionObjs prop will be ignored.
 
-### customClasses
+#### props.stringOperations
+
+Operations on string and email data types. Defaults:
+
+* ==
+* !=
+* contains
+* !contains
+* like
+* !like
+* startsWith
+* !startsWith
+* endsWith
+* !endsWith
+
+#### props.numOperations
+
+Operations on integer and float data types. Defaults:
+
+* ==
+* !=
+* <
+* <=
+* \>
+* \>=
+
+#### props.dateOperations
+
+Operations on date data types. Defaults:
+
+* ==
+* !=
+* <
+* <=
+* \>
+* \>=
+
+#### props.enumOperations
+
+Operations on enumerable and boolean data types. Defaults:
+
+* ==
+* !=
+
+
+#### props.customClasses
 
 Custom CSS classes to apply to structured query. The following fields in an 
 object will be used as classes to change the appearance of structured query:
 
+* **container:** Changes the filter container
 * **input:** Changes the input box
 * **results:** Changes the list container of options
 * **listItem:** Changes each list option in the list container
@@ -124,10 +185,11 @@ customClasses={{
 }}
 ```
 
-### initTokens
+#### props.initTokens
 
 Initial tokens is a list of objects that can be passed in to generate 
-predefined tokens in structured query.
+predefined tokens in structured query. Sending in new initial tokens will also 
+cause the current search to be replaced with the new initial tokens.
 
 Objects passed in need to have the following fields: 
 	* **id ( *string* ):** token identifier
@@ -135,24 +197,29 @@ Objects passed in need to have the following fields:
 	* **operator ( *string* ):** operation being applied to the field
 	* **value ( *string* ):** value to look for
 
-### onTokenAdd
+#### props.onTokenAdd
 
 A callback function that is called when the user finishes generating a new 
 token. This function will receive a list of objects with each object 
 being a token.
 
-### onTokenRemove
+#### props.onTokenRemove
 
 A callback function that is called when the user removes a token. This 
 function will receive a list of objects with each object being a token.
 
-### queryDisabled
+#### props.exportSearch
+
+Callback function that allows you to export/save a search. The callback will 
+receive the list of current search tokens.
+
+#### props.queryDisabled
 
 Toggle if querying is disabled on the table. Sometimes, you may want to allow 
 the current query to be viewable but not modifiable. Set this to true to show 
 query tokens, but it does not allow the user to change the query in the filter.
 
-### enableQueryOnClick
+#### props.enableQueryOnClick
 
 Toggle to allow the user to enable querying if it is disabled. Set if the 
 querying is to be initially disabled, but then want to allow the user to enable 

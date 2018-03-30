@@ -441,7 +441,7 @@ class Tokenizer extends Component {
 						className="clear-token-addon"
 						onClick={this.clearSearch}
 					>
-						<i className="fa fa-times-o" />
+						<i className="fa fa-times" />
 					</span>
 				}
 			</div>
