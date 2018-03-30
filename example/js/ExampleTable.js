@@ -2,12 +2,9 @@ import React, { Fragment } from 'react';
 import StructuredQuery from '../../src';
 
 const ExampleTable = ({data, onTokenAdd, onTokenRemove}) => (
-	<Fragment>
+	<div className="container my-4">
 		<StructuredQuery
-			dateOperations={['==', 'lt', 'lte', 'gt', 'gte']}
-			numOperations={['==', 'lt', 'lte', 'gt', 'gte']}
-			stringOperations={['==', 'left', 'right', 'like']}
-			enumOptions={['==']}
+			stringOperations={['==', '!=', 'left', 'right', 'like']}
 			options={[
 				{
 					id: 'name',
@@ -27,7 +24,7 @@ const ExampleTable = ({data, onTokenAdd, onTokenRemove}) => (
 				{
 					id: 'age',
 					category: 'Age',
-					type: 'number'
+					type: 'integer'
 				},
 				{
 					id: 'phone',
@@ -49,7 +46,7 @@ const ExampleTable = ({data, onTokenAdd, onTokenRemove}) => (
 			onTokenAdd={onTokenAdd}
 			onTokenRemove={onTokenRemove}
 		/>
-		<table>
+		<table className="table table-striped mt-sm-4">
 			<thead>
 				<tr>
 					<th>Name</th>
@@ -75,7 +72,7 @@ const ExampleTable = ({data, onTokenAdd, onTokenRemove}) => (
 			))}
 			</tbody>
 		</table>
-	</Fragment>
+	</div>
 );
 
 export default ExampleTable;

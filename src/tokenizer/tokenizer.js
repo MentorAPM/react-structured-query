@@ -80,25 +80,11 @@ class Tokenizer extends Component {
 
 		// if new initial tokens are a different length set state to
 		// new tokens
-		/*if (nextProps.initTokens.length > searchTokens.length ||
-			nextProps.initTokens.length < searchTokens.length) {
+		if (this.props.initTokens !== nextProps.initTokens) {
 			this.setState({
 				searchTokens: nextProps.initTokens
 			});
-			return;
 		}
-
-		// we do a deep match to check if the initial tokens in the
-		// next props requires a re render of tokens
-		nextProps.initTokens.forEach((token, i) => {
-			if (searchTokens[i].category !== token.category ||
-				searchTokens[i].operator !== token.operator ||
-				searchTokens[i].value !== token.value) {
-				this.setState({
-					searchTokens: nextProps.initTokens
-				});
-			}
-		});*/
 	}
 
 	// Get the options available based on where the user is in the query
@@ -405,7 +391,7 @@ class Tokenizer extends Component {
 
 		const searchWrapperClasses = classNames({
 			'input-group-addon': true,
-			'apm-cursor-p': exportSearch !== null
+			'export-search': exportSearch !== null
 		});
 
 		const searchClasses = classNames({

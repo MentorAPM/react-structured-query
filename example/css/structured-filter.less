@@ -5,12 +5,13 @@
 	padding:10px;
 	font-size: 90%;
 	display:table;
+	word-break: break-all;
 }
 
 .filter-tokenizer:first-child {
-		padding-left: 0;
-		padding-top:0;
-		padding-bottom:0;
+	padding-left: 0;
+	padding-top:0;
+	padding-bottom:0;
 }
 
 .filter-tokenizer .input-group-addon {
@@ -20,6 +21,12 @@
 	border-bottom-right-radius: 0;
 	display: table-cell;
 	background: transparent;
+	text-align: center;
+	width: 50px;
+}
+
+.filter-tokenizer .export-search {
+	cursor: pointer;
 }
 
 .filter-tokenizer .token-collection {
@@ -27,25 +34,31 @@
 }
 
 .filter-tokenizer .typeahead {
-  overflow:auto;
-  display:block;
+	overflow:auto;
+	display:block;
 }
 
 .filter-tokenizer .typeahead-token {
 	display: block;
 	float:left;
-
 	background-color: #e8e8e8;
 	background-image: linear-gradient(#f0f0f0, #e0e0e0);
 	border: 1px solid #ccc;
 	border-radius: 2px;
-
 	margin:3px;
 	padding:5px;
-
 	font-weight:bold;
 }
 
+.filter-tokenizer .typeahead-token-disabled {
+	background: none;
+}
+
+.filter-tokenizer .typeahead-token .typeahead-token-close {
+	font-size: larger;
+	margin-left: 5px;
+	text-decoration: underline;
+}
 
 .filter-input-group {
 	border: 0px;
@@ -70,7 +83,7 @@
 	width:100%;
 }
 
-.filter-tokenizer .typeahead input:focus {outline:0;}
+.filter-tokenizer .typeahead input:focus { outline:0; }
 
 .filter-tokenizer ul.typeahead-selector {
 	z-index:100;
@@ -83,16 +96,13 @@
 	width:200px;
 	max-height:200px;
 	overflow-y:auto;
-
 	box-shadow: 5px 5px 5px #888888;
 }
 
 .filter-tokenizer ul.typeahead-selector li {
 	z-index:9999;
 	border-bottom: 1px solid #ccc;
-	background-image: linear-gradient(
-      #ffffff, #f0f0f0
-    );
+	background-image: linear-gradient(#ffffff, #f0f0f0);
 }
 
 .filter-tokenizer ul.typeahead-selector li.header {
@@ -133,3 +143,4 @@
 	max-width: 400px;
 	margin-top: 15px;
 }
+
