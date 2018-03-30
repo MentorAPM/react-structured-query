@@ -1,9 +1,13 @@
 import React, { Fragment } from 'react';
 import StructuredQuery from '../../src';
 
-const ExampleTable = ({data}) => (
+const ExampleTable = ({data, onTokenAdd, onTokenRemove}) => (
 	<Fragment>
 		<StructuredQuery
+			dateOperations={['==', 'lt', 'lte', 'gt', 'gte']}
+			numOperations={['==', 'lt', 'lte', 'gt', 'gte']}
+			stringOperations={['==', 'left', 'right', 'like']}
+			enumOptions={['==']}
 			options={[
 				{
 					id: 'name',
@@ -42,8 +46,8 @@ const ExampleTable = ({data}) => (
 					type: 'datetime'
 				}
 			]}
-			onTokenAdd={() => {}}
-			onTokenRemove={() => {}}
+			onTokenAdd={onTokenAdd}
+			onTokenRemove={onTokenRemove}
 		/>
 		<table>
 			<thead>

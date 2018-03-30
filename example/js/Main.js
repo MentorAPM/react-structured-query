@@ -9,15 +9,39 @@ class Main extends Component {
 		super(props);
 
 		this.state = {
-			data: dummyData().get()
+			data: dummyData()
 		};
+	}
+
+	onTokenAdd = (searchTokens) => {
+		const query = searchTokens.map(token => {
+			return { [token.id]: { [token.operator]: token.value } };
+		});
+
+		this.setState({
+			data: dummyData(query)
+		});
+	}
+
+	onTokenRemove = (searchTokens) => {
+		const query = searchTokens.map(token => {
+			return { [token.id]: { [token.operator]: token.value } };
+		});
+
+		this.setState({
+			data: query.length > 0 ? dummyData(query) : dummyData()
+		});
 	}
 
 	render() {
 		const { data } = this.state;
 
 		return (
-			<ExampleTable data={data} />
+			<ExampleTable
+				data={data}
+				onTokenAdd={this.onTokenAdd}
+				onTokenRemove={this.onTokenRemove}
+			/>
 		);
 	}
 }

@@ -80,7 +80,7 @@ class Tokenizer extends Component {
 
 		// if new initial tokens are a different length set state to
 		// new tokens
-		if (nextProps.initTokens.length > searchTokens.length ||
+		/*if (nextProps.initTokens.length > searchTokens.length ||
 			nextProps.initTokens.length < searchTokens.length) {
 			this.setState({
 				searchTokens: nextProps.initTokens
@@ -98,7 +98,7 @@ class Tokenizer extends Component {
 					searchTokens: nextProps.initTokens
 				});
 			}
-		});
+		});*/
 	}
 
 	// Get the options available based on where the user is in the query
