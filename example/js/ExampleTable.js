@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import StructuredQuery from '../../src';
 
 const ExampleTable = ({data, onTokenAdd, onTokenRemove}) => (

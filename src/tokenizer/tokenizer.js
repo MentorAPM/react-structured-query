@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -304,7 +304,6 @@ class Tokenizer extends Component {
 
 	}
 
-	// TODO: this doesnt work with duplicate object tokens
 	// Check the next token against the current tokens for duplicates
 	_checkDuplicateToken(value) {
 		return this.state.searchTokens.some(token => {
@@ -380,8 +379,17 @@ class Tokenizer extends Component {
 		}
 	}
 
+	clearSearch = () => {
+		this.setState({
+			searchTokens: []
+		}, () => {
+			this.props.onTokenRemove(this.state.searchTokens);
+		});
+	}
+
 	render() {
 		const { customClasses, exportSearch } = this.props;
+		const { searchTokens } = this.state;
 
 		const filterClasses = classNames({
 			'filter-tokenizer': true,
@@ -401,36 +409,42 @@ class Tokenizer extends Component {
 		});
 
 		return (
-			<Fragment>
-				<div className={filterClasses} onClick={this.enableQueryClick}>
-					<span
-						className={searchWrapperClasses}
-						onClick={this.exportSearch}
-					>
-						<i className={searchClasses} />
-					</span>
-					<div className="token-collection">
-						{this._renderTokens()}
-						<div className="filter-input-group">
-							<div className="filter-category">
-								{this.state.nextToken.category}
-							</div>
-							<div className="filter-operator">
-								{this.state.nextToken.operator}
-							</div>
-							<Typeahead
-								customClasses={this.props.customClasses}
-								disabled={this.state.disabled}
-								options={this._getOptionsForTypeahead()}
-								header={this._getHeader()}
-								datatype={this._getInputDatatype()}
-								addTokenForValue={this._addTokenForValue}
-								onKeyDown={this._onKeyDown}
-							/>
+			<div className={filterClasses} onClick={this.enableQueryClick}>
+				<span
+					className={searchWrapperClasses}
+					onClick={this.exportSearch}
+				>
+					<i className={searchClasses} />
+				</span>
+				<div className="token-collection">
+					{this._renderTokens()}
+					<div className="filter-input-group">
+						<div className="filter-category">
+							{this.state.nextToken.category}
 						</div>
+						<div className="filter-operator">
+							{this.state.nextToken.operator}
+						</div>
+						<Typeahead
+							customClasses={this.props.customClasses}
+							disabled={this.state.disabled}
+							options={this._getOptionsForTypeahead()}
+							header={this._getHeader()}
+							datatype={this._getInputDatatype()}
+							addTokenForValue={this._addTokenForValue}
+							onKeyDown={this._onKeyDown}
+						/>
 					</div>
 				</div>
-			</Fragment>
+				{ searchTokens.length > 0 && 
+					<span
+						className="clear-token-addon"
+						onClick={this.clearSearch}
+					>
+						<i className="fa fa-times-o" />
+					</span>
+				}
+			</div>
 		);
 	}
 }
