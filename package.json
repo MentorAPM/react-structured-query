@@ -1,12 +1,12 @@
 {
-  "name": "React Structured Query",
+  "name": "react-structured-query",
   "version": "1.0.1",
   "description": "Structured query for filtering data",
   "main": "index.js",
   "scripts": {
     "start": "parcel ./example/index.html",
     "build": "parcel build ./src/index.js --out-dir build",
-    "test": "cross-env NODE_ENV=test nyc tape src/**/__tests__/*.test.js | faucet"
+    "test": "tape -r babel-register -r ./test/browser.js src/**/__tests__/*.test.js | faucet"
   },
   "author": "MentorAPM",
   "license": "ISC",
@@ -50,16 +50,16 @@
     "query"
   ],
   "nyc": {
-	  "require": [
-		  "babel-register",
-		  "./test/browser.js"
-	  ],
-	  "reporter": [
-		  "lcov",
-		  "text"
-	  ],
-	  "sourceMap": false,
-	  "instrument": false
+    "require": [
+      "babel-register",
+      "./test/browser.js"
+    ],
+    "reporter": [
+      "lcov",
+      "text"
+    ],
+    "sourceMap": false,
+    "instrument": false
   },
   "bugs": {
     "url": "https://github.com/MentorAPM/react-structured-query/issues"
