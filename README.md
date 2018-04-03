@@ -36,7 +36,6 @@ npm run test:coverage
 
 ## TODO
 
-* Fix tests
 * Allow disabling tokens without removing them
 * Allow for deeper querying into objects
 
@@ -59,8 +58,10 @@ fuzzy matching for all lists. Space, tab, and enter will autocomplete as well.
 
 ### Styling
 
-CSS styles can be found in [structured-filter.css](./example/css/structured-filter.css)
-Datepicker styles can be found in [input-moment.css](./example/css/input-moment.css)
+Structured filter styles can be found in
+[structured-filter.css](./example/css/structured-filter.css)
+Datepicker styles can be found in
+[input-moment.css](./example/css/input-moment.css)
 
 ## Props
 
@@ -150,7 +151,7 @@ Operations on integer and float data types. Defaults:
 
 #### props.dateOperations
 
-Operations on date data types. Defaults are same as integer operations.
+Operations on date data types. Defaults are same as num operations.
 
 #### props.enumOperations
 
