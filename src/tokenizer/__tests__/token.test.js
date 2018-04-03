@@ -17,8 +17,8 @@ test('shallow render test of structured query token', (t) => {
 	const wrapper = shallow(<Token />);
 	const children = { category: 'test', operator: '==', value: 'test' };
 
-	t.equal(wrapper.text(), ' ',
-		'Text is not correct on render with no props');
+	t.equal(wrapper.text(), '  ',
+		'Text is not correct on init render with no props');
 
 	wrapper.setProps({
 		children

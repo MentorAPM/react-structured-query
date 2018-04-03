@@ -210,7 +210,7 @@ test('full mount render test of structured query tokenizer', (t) => {
 	
 	// test removing tokens
 	wrapper.setProps({
-		initTokens,
+		initTokens: initTokens.slice(),
 		onTokenRemove: (searchTokens) => {
 			t.skip(searchTokens, [],
 				'Search tokens sent to onTokenRemove callback are incorrect');

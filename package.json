@@ -6,7 +6,7 @@
   "scripts": {
     "start": "parcel ./example/index.html",
     "build": "parcel build ./src/index.js --out-dir build",
-    "test": "tape -r babel-register ./test/browser.js ./src/**/__tests__/*.test.js | faucet",
+    "test": "tape -r babel-register ./test/browser.js src/**/__tests__/*.test.js | faucet",
     "test:coverage": "cross-env NODE_ENV=test nyc tape src/**/__tests__/*.test.js | faucet"
   },
   "author": "MentorAPM",
