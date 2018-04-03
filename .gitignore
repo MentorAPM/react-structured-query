@@ -3,3 +3,5 @@ node_modules
 dist
 coverage
 .nyc_output
+coverage
+package-lock.json

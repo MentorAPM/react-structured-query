@@ -1,4 +1,11 @@
 {
-	"presets": ["env", "react", "es2017"],
-	"plugins": ["transform-class-properties"]
+	"presets": ["env", "react"],
+	"plugins": ["transform-class-properties"],
+	"env": {
+		"test": {
+			"plugins": [
+				"istanbul"
+			]
+		}
+	}
 }

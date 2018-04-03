@@ -3,7 +3,7 @@
 ## Overview
 
 React Structured Query is a library that can be used to filter data.  It can be 
-used to generate complex queries that should retrieve data from the backend.
+used to generate complex queries that can be used to retrieve data.
 
 It is a continuation of https://github.com/SummitRoute/react-structured-filter.
 
@@ -24,9 +24,13 @@ npm run build
 ```
 npm start
 ```
-* Run tests and generate coverage
+* Run tests
 ```
 npm run test
+```
+* Run tests and generate coverage
+```
+npm run test:coverage
 ```
 
 

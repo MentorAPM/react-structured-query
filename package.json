@@ -6,7 +6,8 @@
   "scripts": {
     "start": "parcel ./example/index.html",
     "build": "parcel build ./src/index.js --out-dir build",
-    "test": "tape -r babel-register -r ./test/browser.js src/**/__tests__/*.test.js | faucet"
+    "test": "tape -r babel-register ./test/browser.js ./src/**/__tests__/*.test.js | faucet",
+    "test:coverage": "cross-env NODE_ENV=test nyc tape src/**/__tests__/*.test.js | faucet"
   },
   "author": "MentorAPM",
   "license": "ISC",
@@ -14,13 +15,14 @@
     "classnames": "^2.2.5",
     "fuzzy": "^0.1.3",
     "input-moment": "^0.4.0",
-    "moment": "^2.20.1",
-    "prop-types": "^15.6.0",
-    "react": "^16.x.x",
-    "react-onclickoutside": "^6.6.0"
+    "moment": "^2.22.0",
+    "prop-types": "^15.6.1",
+    "react": "^16.3.0",
+    "react-onclickoutside": "^6.7.1",
+    "tape-catch": "^1.0.6"
   },
   "devDependencies": {
-    "babel-plugin-istanbul": "^4.1.5",
+    "babel-plugin-istanbul": "^4.1.6",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.6.1",
     "babel-preset-es2017": "^6.24.1",
@@ -30,11 +32,12 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "faucet": "0.0.1",
+    "istanbul": "^0.4.5",
     "jsdom": "^11.6.2",
     "less": "^3.0.1",
     "nyc": "^11.6.0",
-    "parcel-bundler": "^1.6.2",
-    "react-dom": "^16.2.0",
+    "parcel-bundler": "^1.7.0",
+    "react-dom": "^16.3.0",
     "tape": "^4.9.0"
   },
   "directories": {
