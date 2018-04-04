@@ -24,6 +24,7 @@
 	background: transparent;
 	text-align: center;
 	width: 50px;
+	vertical-align: middle;
 }
 
 .filter-tokenizer .clear-token-addon {
@@ -36,6 +37,7 @@
 	width: 50px;
 	text-align: center;
 	cursor: pointer;
+	vertical-align: middle;
 }
 
 .filter-tokenizer .export-search {
@@ -52,8 +54,8 @@
 }
 
 .filter-tokenizer .typeahead-token {
-	display: block;
-	float:left;
+	display: inline-block;
+	float: left;
 	background-color: #e8e8e8;
 	background-image: linear-gradient(#f0f0f0, #e0e0e0);
 	border: 1px solid #ccc;
@@ -75,13 +77,16 @@
 .filter-input-group {
 	border: 0px;
 	border-radius: 2px;
-	overflow:auto;
-	display:block;
-	margin:3px;
-	padding:5px;
+	overflow: auto;
+	display: inline-block;
+	float: left;
+	margin: 3px;
+	padding: 5px;
 }
 
-.filter-input-group .filter-category, .filter-input-group .filter-operator, .filter-input-group .filter-value {
+.filter-input-group .filter-category,
+.filter-input-group .filter-operator,
+.filter-input-group .filter-value {
 	overflow:auto;
 	display: block;
 	float:left;
