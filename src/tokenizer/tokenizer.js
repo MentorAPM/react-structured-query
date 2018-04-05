@@ -144,7 +144,7 @@ class Tokenizer extends Component {
 			return option.id === this.state.nextToken.id;
 		});
 
-		let options = categorySelected.options || categorySelected.optionObjs;
+		let options = categorySelected.options;
 
 		// default case for boolean data types
 		if (categorySelected.type === 'boolean' && !options) {
@@ -290,8 +290,6 @@ class Tokenizer extends Component {
 
 		this.setState({
 			searchTokens: this.state.searchTokens.concat(addSearchToken)
-		// call function to retrieve new data for the table
-		// after state has guaranteed to update
 		}, () => {
 			this.props.onTokenAdd(this.state.searchTokens);
 		});

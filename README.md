@@ -113,16 +113,6 @@ enumerable list. Used with the enumoptions data type.
 *Note:* Boolean data type has a default list of `['True', 'False']`. This 
 can be overrode by passing in your own options object.
 
-* optionObjs ( *[object]* )
-
-A list of options that will generate if the value is supposed to be an 
-enumerable list. This one will take objects that must have an id and name field
-in them. Structured query will generate a list based on the name field. 
-Used with enumoptions data type.
-
-*Note:* If an options object passes both an options and optionObjs prop,
-only the options prop will be used and optionObjs prop will be ignored.
-
 #### props.stringOperations
 
 Operations on string and email data types. Defaults:
