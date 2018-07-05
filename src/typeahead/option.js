@@ -47,8 +47,7 @@ class TypeaheadOption extends Component {
 		return (
 			<li className={classList} onClick={this._onClick}>
 				<a href="#" className={this._getClasses()}>
-					{typeof option === 'object' ?
-						option.name : option }
+					{option}
 				</a>
 			</li>
 		);

@@ -33,9 +33,6 @@ class Token extends Component {
 	render() {
 		const { children } = this.props;
 
-		const value = typeof children.value === 'object' ?
-			children.value.name : children.value;
-
 		return (
 			<div
 				className="typeahead-token"

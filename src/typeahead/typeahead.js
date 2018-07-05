@@ -75,17 +75,7 @@ export class Typeahead extends Component {
 	getOptionsForValue(value, options) {
 		let fuzzyOptions = {};
 
-		if (typeof value === 'object'
-			|| (options.length > 0
-				 && typeof options[0] === 'object')) {
-			fuzzyOptions = {
-				extract: function(el) {
-					return el.name;
-				}
-			};
-		}
-
-		let result = fuzzy.filter(value, options, fuzzyOptions).map(res => {
+		let result = fuzzy.filter(value, options).map(res => {
 			return res.string;
 		});
 
