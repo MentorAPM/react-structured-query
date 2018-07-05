@@ -34,8 +34,8 @@ class Token extends Component {
 		);
 	}
 
-	_disableToken = () => {
-		if (!this.props.onRemove) return;
+	_disableToken = (event) => {
+		event.stopPropagation();
 
 		this.props.onClick(this.props.children);
 	}

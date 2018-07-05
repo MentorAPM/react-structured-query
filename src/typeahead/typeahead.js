@@ -64,7 +64,12 @@ export class Typeahead extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
+		if (nextProps.focused) {
+			this.inputRef.focus();
+		}
+
 		this.setState({
+			focused: nextProps.focused,
 			options: nextProps.options,
 			header: nextProps.header,
 			visible: nextProps.options
@@ -148,14 +153,6 @@ export class Typeahead extends Component {
 
 		this.props.addTokenForValue(option);
 	}
-
-	// focus when user clicks inside of component
-	_onFocus = (event) => {
-		this.setState({
-			focused: true
-		});
-	}
-
 
 	// As the user enters keystrokes fuzzy match against current options
 	_onTextEntryUpdated = (event) => {
@@ -336,15 +333,15 @@ export class Typeahead extends Component {
 		});
 
 		return (
-			<div onFocus={this._onFocus} className="typeahead">
+			<div className="typeahead">
 				<input
+					className={inputClassList}
 					disabled={this.props.disabled}
+					onChange={this._onTextEntryUpdated}
+					onKeyDown={this._onKeyDown}
 					ref={ref => this.inputRef = ref}
 					type="text"
-					onKeyDown={this._onKeyDown}
-					onChange={this._onTextEntryUpdated}
 					value={this.state.value}
-					className={inputClassList}
 				/>
 				{this._renderIncrementalSearchResults()}
 			</div>

@@ -24,7 +24,6 @@ class Main extends Component {
 	}
 
 	onTokenRemove = (searchTokens) => {
-		console.log('token removed', searchTokens);
 		const query = searchTokens.map(token => {
 			return { [token.id]: { [token.operator]: token.value } };
 		});

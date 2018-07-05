@@ -52,25 +52,27 @@ class Tokenizer extends Component {
 	constructor(props) {
 		super(props);
 
-		// @selected - holds all user generated tokens to search with
+		// @disabled: turn structured query off but used to displays tokens
+		// @focused: true when typeahead input is focused; false otherwise
+		// @searchTokens - holds all user generated tokens to search with
 		// 	Ex: [{category: 'id', operator: '=', value: '123'}, ...]
-		// @nextToken - holds the next token to be added to the search tokens
-		// 		which are sent for filtering -- 
+		// @nextToken - holds the next token to be added to the search 
+		// 		tokens which are used for filtering -- 
 		// 		contains:
 		// 			@id - id for back end retrieval
 		// 			@category - which field to search in
 		//	 		@operator - the operator to apply to the field
 		//	 		@value - the value to search for
-		// @disabled: turn structured query off but used to displays tokens
 		this.state = {
+			disabled: this.props.disabled,
+			focused: false,
 			searchTokens: this.props.initTokens,
 			nextToken: {
 				id: '',
 				category: '',
 				operator: '',
 				value: ''
-			},
-			disabled: this.props.disabled
+			}
 		};
 	}
 
@@ -284,6 +286,7 @@ class Tokenizer extends Component {
 	// Add a new value to the new token and add to
 	// all search tokens
 	_addValueToNewToken(value) {
+		const { onTokenAdd } = this.props;
 		const addSearchToken = Object.assign({},
 					this.state.nextToken,
 					{ value });
@@ -291,7 +294,9 @@ class Tokenizer extends Component {
 		this.setState({
 			searchTokens: this.state.searchTokens.concat(addSearchToken)
 		}, () => {
-			this.props.onTokenAdd(this.state.searchTokens);
+			if (typeof onTokenAdd === 'function') {
+				onTokenAdd(this.state.searchTokens);
+			}
 		});
 	
 		// Reset state for next token
@@ -339,28 +344,43 @@ class Tokenizer extends Component {
 	}
 
 	_disableToken = (token) => {
-		const { onTokenRemove } = this.props;
+		const { onTokenAdd, onTokenRemove } = this.props;
 		if (this.state.disabled) return;
 
 		let index = this.state.searchTokens.indexOf(token);
 
 		if (index === -1) return;
 
+		let disabled;
+
 		const disableToken = this.state.searchTokens.map((token, i) => {
 			if (index === i) {
+				disabled = !token.disabled;
+
 				return Object.assign({},
-					token, { disabled: !token.disabled });
+					token, { disabled });
 			}
 
 			return token;
 		});
 
 		this.setState({
+			focused: false,
 			searchTokens: disableToken
 		}, () => {
-			onTokenRemove(this.state.searchTokens.filter(token => {
+			const tokens = this.state.searchTokens.filter(token => {
 				return token.disabled !== true;
-			}));
+			});
+
+			if (disabled) {
+				if (typeof onTokenRemove === 'function') {
+					onTokenRemove(tokens);
+				}
+			} else {
+				if (typeof onTokenAdd === 'function') {
+					onTokenAdd(tokens);
+				}
+			}
 		});	
 	}
 
@@ -383,11 +403,14 @@ class Tokenizer extends Component {
 		});
 
 		this.setState({
+			focused: false,
 			searchTokens: removeToken
 		}, () => {
-			onTokenRemove(this.state.searchTokens.filter(token => {
-				return token.disabled !== true;
-			}));
+			if (typeof onTokenRemove === 'function') {
+				onTokenRemove(this.state.searchTokens.filter(token => {
+					return token.disabled !== true;
+				}));
+			}
 		});
 	}
 
@@ -408,11 +431,20 @@ class Tokenizer extends Component {
 	}
 
 	clearSearch = () => {
+		const { onTokenRemove } = this.props;
+
 		this.setState({
+			focused: false,
 			searchTokens: []
 		}, () => {
-			this.props.onTokenRemove(this.state.searchTokens);
+			if (typeof onTokenRemove === 'function') {
+				this.props.onTokenRemove(this.state.searchTokens);
+			}
 		});
+	}
+
+	_focusTypeahead = () => {
+		this.setState({ focused: true });
 	}
 
 	render() {
@@ -437,14 +469,20 @@ class Tokenizer extends Component {
 		});
 
 		return (
-			<div className={filterClasses} onClick={this.enableQueryClick}>
+			<div
+				className={filterClasses}
+				onClick={this.enableQueryClick}
+			>
 				<span
 					className={searchWrapperClasses}
 					onClick={this.exportSearch}
 				>
 					<i className={searchClasses} />
 				</span>
-				<div className="token-collection">
+				<div
+					className="token-collection"
+					onClick={this._focusTypeahead}
+				>
 					{this._renderTokens()}
 					<div className="filter-input-group">
 						<div className="filter-category">
@@ -454,13 +492,14 @@ class Tokenizer extends Component {
 							{this.state.nextToken.operator}
 						</div>
 						<Typeahead
-							customClasses={this.props.customClasses}
-							disabled={this.state.disabled}
-							options={this._getOptionsForTypeahead()}
-							header={this._getHeader()}
-							datatype={this._getInputDatatype()}
 							addTokenForValue={this._addTokenForValue}
+							customClasses={this.props.customClasses}
+							datatype={this._getInputDatatype()}
+							disabled={this.state.disabled}
+							focused={this.state.focused}
+							header={this._getHeader()}
 							onKeyDown={this._onKeyDown}
+							options={this._getOptionsForTypeahead()}
 						/>
 					</div>
 				</div>

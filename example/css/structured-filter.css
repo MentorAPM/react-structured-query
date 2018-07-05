@@ -42,6 +42,7 @@
 
 .filter-tokenizer .token-collection {
 	display: table-cell;
+	cursor: text;
 }
 
 .filter-tokenizer .typeahead {
@@ -60,6 +61,7 @@
 	padding:5px;
 	font-weight:bold;
 	user-select: none;
+	cursor: default;
 }
 
 .filter-tokenizer .typeahead-token-disabled {
