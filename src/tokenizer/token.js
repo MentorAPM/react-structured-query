@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 // Token component displays a users query
 class Token extends Component {
 
 	_makeCloseButton() {
-		if (!this.props.onRemove) {
-			return;
-		}
+		if (!this.props.onRemove) return;
 
 		const onClickClose = (event) => {
 			this.props.onRemove(this.props.children);
 			event.preventDefault();
 		};
-
 
 		return (
 			<a 
@@ -26,6 +24,12 @@ class Token extends Component {
 		);
 	}
 
+	_disableToken = () => {
+		if (!this.props.onRemove) return;
+
+		this.props.onClick(this.props.children);
+	}
+
 	render() {
 		const { children } = this.props;
 
@@ -33,7 +37,11 @@ class Token extends Component {
 			children.value.name : children.value;
 
 		return (
-			<div className="typeahead-token">
+			<div
+				className="typeahead-token"
+				onClick={this._disableToken}
+				style={{ background: children.disabled === true ? 'transparent': '' }}
+			>
 				{children.category} {children.operator} {value}
 				{this._makeCloseButton()}
 			</div>

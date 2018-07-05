@@ -17,28 +17,26 @@
 
 .filter-tokenizer .input-group-addon {
 	border: 0px;
+	display: table-cell;
+	background: transparent;
+	text-align: center;
+	width: 50px;
+	vertical-align: middle;
+}
+
+.filter-tokenizer .left-addon {
 	border-right: 1px solid #ccc;
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
-	display: table-cell;
-	background: transparent;
-	text-align: center;
-	width: 50px;
 }
 
-.filter-tokenizer .clear-token-addon {
-	border: 0px;
+.filter-tokenizer .right-addon {
 	border-left: 1px solid #ccc;
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
-	display: table-cell;
-	background: transparent;
-	width: 50px;
-	text-align: center;
-	cursor: pointer;
 }
 
-.filter-tokenizer .export-search {
+.filter-tokenizer .cursor-pointer {
 	cursor: pointer;
 }
 

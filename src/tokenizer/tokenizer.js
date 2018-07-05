@@ -328,6 +328,7 @@ class Tokenizer extends Component {
 				return (
 					<Token
 						key={tokenKey}
+						onClick={this._disableToken}
 						onRemove={this._removeTokenForValue}
 					>
 						{token}
@@ -339,29 +340,57 @@ class Tokenizer extends Component {
 		return tokenList;
 	}
 
+	_disableToken = (token) => {
+		const { onTokenRemove } = this.props;
+		const { searchTokens } = this.state;
+		if (this.state.disabled) return;
 
+		let index = this.state.searchTokens.indexOf(token);
+
+		if (index === -1) return;
+
+		const disableToken = searchTokens.map((token, i) => {
+			if (index === i) {
+				return Object.assign({}, token, disabled: true);
+			}
+
+			return token;
+		});
+
+		this.setState({
+			searchTokens: disableToken
+		}, () => {
+			onTokenRemove(searchTokens.map(token => {
+				return token.disabled !== true;
+			}));
+		});	
+	}
 
 	// Remove a token from the search tokens
 	_removeTokenForValue = (value) => {
+		const { onTokenRemove } = this.props;
+		const { searchTokens } = this.state;
 		// dont allow removal of tokens if querying is disabled
 		if (this.state.disabled) {
 			return;
 		}
 
-		let index = this.state.searchTokens.indexOf(value);
+		const index = searchTokens.indexOf(value);
 		// return nothing if object not found
 		if (index === -1) {
 			return;
 		}
 
-		let removeToken = this.state.searchTokens.filter((token, i) => {
+		const removeToken = searchTokens.filter((token, i) => {
 			return index !== i;
 		});
 
 		this.setState({
 			searchTokens: removeToken
 		}, () => {
-			this.props.onTokenRemove(this.state.searchTokens)
+			onTokenRemove(searchTokens.map(token => {
+				return token.disabled !== true;
+			}));
 		});
 
 		return; 
@@ -401,10 +430,10 @@ class Tokenizer extends Component {
 			[customClasses.container]: !!customClasses.container
 		});
 
-		const searchWrapperClasses = classNames({
-			'input-group-addon': true,
-			'export-search': exportSearch !== null
-		});
+		const searchWrapperClasses = classNames(
+			'input-group-addon left-addon',
+			{ 'cursor-pointer': exportSearch !== null }
+		);
 
 		const searchClasses = classNames({
 			'fa': true,
@@ -442,7 +471,7 @@ class Tokenizer extends Component {
 				</div>
 				{ searchTokens.length > 0 && 
 					<span
-						className="clear-token-addon"
+						className="input-group-addon right-addon cursor-pointer"
 						onClick={this.clearSearch}
 					>
 						<i className="fa fa-times" />
