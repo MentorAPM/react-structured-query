@@ -59,6 +59,7 @@
 	margin:3px;
 	padding:5px;
 	font-weight:bold;
+	user-select: none;
 }
 
 .filter-tokenizer .typeahead-token-disabled {

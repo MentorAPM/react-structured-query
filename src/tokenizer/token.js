@@ -5,12 +5,22 @@ import classNames from 'classnames';
 // Token component displays a users query
 class Token extends Component {
 
+	static propTypes = {
+		children: PropTypes.object,
+		onClick: PropTypes.func,
+		onRemove: PropTypes.func
+	}
+
+	static defaultProps = {
+		children: {}
+	}
+
 	_makeCloseButton() {
 		if (!this.props.onRemove) return;
 
 		const onClickClose = (event) => {
+			event.stopPropagation();
 			this.props.onRemove(this.props.children);
-			event.preventDefault();
 		};
 
 		return (
@@ -39,20 +49,11 @@ class Token extends Component {
 				onClick={this._disableToken}
 				style={{ background: children.disabled === true ? 'transparent': '' }}
 			>
-				{children.category} {children.operator} {value}
+				{children.category} {children.operator} {children.value}
 				{this._makeCloseButton()}
 			</div>
 		);
 	}
 }
-
-Token.propTypes = {
-	children: PropTypes.object,
-	onRemove: PropTypes.func
-};
-
-Token.defaultProps = {
-	children: {}
-};
 
 export default Token;

@@ -340,16 +340,16 @@ class Tokenizer extends Component {
 
 	_disableToken = (token) => {
 		const { onTokenRemove } = this.props;
-		const { searchTokens } = this.state;
 		if (this.state.disabled) return;
 
 		let index = this.state.searchTokens.indexOf(token);
 
 		if (index === -1) return;
 
-		const disableToken = searchTokens.map((token, i) => {
+		const disableToken = this.state.searchTokens.map((token, i) => {
 			if (index === i) {
-				return Object.assign({}, token, disabled: true);
+				return Object.assign({},
+					token, { disabled: !token.disabled });
 			}
 
 			return token;
@@ -358,7 +358,7 @@ class Tokenizer extends Component {
 		this.setState({
 			searchTokens: disableToken
 		}, () => {
-			onTokenRemove(searchTokens.map(token => {
+			onTokenRemove(this.state.searchTokens.filter(token => {
 				return token.disabled !== true;
 			}));
 		});	
@@ -367,31 +367,28 @@ class Tokenizer extends Component {
 	// Remove a token from the search tokens
 	_removeTokenForValue = (value) => {
 		const { onTokenRemove } = this.props;
-		const { searchTokens } = this.state;
 		// dont allow removal of tokens if querying is disabled
 		if (this.state.disabled) {
 			return;
 		}
 
-		const index = searchTokens.indexOf(value);
+		const index = this.state.searchTokens.indexOf(value);
 		// return nothing if object not found
 		if (index === -1) {
 			return;
 		}
 
-		const removeToken = searchTokens.filter((token, i) => {
+		const removeToken = this.state.searchTokens.filter((token, i) => {
 			return index !== i;
 		});
 
 		this.setState({
 			searchTokens: removeToken
 		}, () => {
-			onTokenRemove(searchTokens.map(token => {
+			onTokenRemove(this.state.searchTokens.filter(token => {
 				return token.disabled !== true;
 			}));
 		});
-
-		return; 
 	}
 
 	enableQueryClick = () => {
