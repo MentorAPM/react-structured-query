@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
 import Typeahead from '../typeahead/typeahead';
 import Token from './token';
@@ -76,16 +77,11 @@ class Tokenizer extends Component {
 		};
 	}
 
-
 	componentWillReceiveProps(nextProps) {
 		const { searchTokens } = this.state;
 
-		// if new initial tokens are a different length set state to
-		// new tokens
 		if (this.props.initTokens !== nextProps.initTokens) {
-			this.setState({
-				searchTokens: nextProps.initTokens
-			});
+			this.setState({ searchTokens: nextProps.initTokens });
 		}
 	}
 
@@ -210,18 +206,41 @@ class Tokenizer extends Component {
 			});
 		// else we remove a token from the search tokens
 		} else {
-			// Check if we have any search tokens
-			if (!(this.state.searchTokens.length > 0)) {
-				return;
-			}
+			const token = this.getLastInsertedToken();
 
-			this._removeTokenForValue(
-				this.state.searchTokens[this.state.searchTokens.length - 1]
-			);
+			// no search tokens
+			if (!token) return;
+
+			this._removeTokenForValue(token);
 		}
 	}
 
+	// get the count of search tokens for all non hidden tokens
+	getSearchTokenCount = () => {
+		let count = 0;
 
+		this.state.searchTokens.forEach(token => {
+			if (!token.hidden) {
+				count++;
+			}
+		});
+
+		return count;
+	}
+
+	// get the last inserted search token; return null if there is no last
+	// inserted search token
+	getLastInsertedToken = () => {
+		const { searchTokens } = this.state;
+
+		for (let i = searchTokens.length - 1; i >= 0; i--) {
+			if (!searchTokens[i].hidden) {
+				return searchTokens[i];
+			}
+		}
+
+		return null;
+	}
 
 	// Add a token to the users current query
 	// One of three things can happen when a user selects something
@@ -324,23 +343,22 @@ class Tokenizer extends Component {
 	// constructed
 	_renderTokens() {
 		// add all currently applied search tokens if they exist
-		let tokenList = this.state.searchTokens.map(token => {
+		return this.state.searchTokens.map(token => {
 
-				let tokenKey = token.category + token.operator + token.value;
+			if (token.hidden) return null;
 
-				return (
-					<Token
-						key={tokenKey}
-						onClick={this._disableToken}
-						onRemove={this._removeTokenForValue}
-					>
-						{token}
-					</Token>
-			       );
-			}, this);
+			let tokenKey = token.category + token.operator + token.value;
 
-
-		return tokenList;
+			return (
+				<Token
+					key={tokenKey}
+					onClick={this._disableToken}
+					onRemove={this._removeTokenForValue}
+				>
+					{token}
+				</Token>
+		       );
+		});
 	}
 
 	_disableToken = (token) => {
@@ -393,10 +411,9 @@ class Tokenizer extends Component {
 		}
 
 		const index = this.state.searchTokens.indexOf(value);
+
 		// return nothing if object not found
-		if (index === -1) {
-			return;
-		}
+		if (index === -1) return;
 
 		const removeToken = this.state.searchTokens.filter((token, i) => {
 			return index !== i;
@@ -503,7 +520,7 @@ class Tokenizer extends Component {
 						/>
 					</div>
 				</div>
-				{ searchTokens.length > 0 && 
+				{ this.getSearchTokenCount() > 0 && 
 					<span
 						className="input-group-addon right-addon cursor-pointer"
 						onClick={this.clearSearch}
