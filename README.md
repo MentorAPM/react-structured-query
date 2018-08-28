@@ -36,7 +36,6 @@ npm run test:coverage
 
 ## TODO
 
-* Allow disabling tokens without removing them
 * Allow for deeper querying into objects
 
 ### Features

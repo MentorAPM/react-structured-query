@@ -9,14 +9,6 @@ class Main extends Component {
 	constructor(props) {
 		super(props);
 
-		this.initTokens = [{
-			id: 'name',
-			category: 'Name',
-			operator: '==',
-			value: 'Brandi Herrera',
-			hidden: true
-		}];
-
 		this.state = {
 			data: dummyData()
 		};
@@ -87,7 +79,6 @@ class Main extends Component {
 							type: 'datetime'
 						}
 					]}
-					initTokens={this.initTokens}
 					onTokenAdd={this.onTokenAdd}
 					onTokenRemove={this.onTokenRemove}
 				/>

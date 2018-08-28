@@ -186,6 +186,8 @@ export class Typeahead extends Component {
 
 	// Handle a tab event for autofill
 	_onTab(event) {
+		event.preventDefault();
+
 		// pass the first visible option in the list for tab 
 		// completion
 		let option = this.state.selectedOption ? 
